@@ -5,4 +5,4 @@
  * Date: 29.07.2017
  * Time: 15:50
  */
-phpinfo();
+echo phpinfo();
