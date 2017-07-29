@@ -1,12 +1,12 @@
 <?php
-
+namespace Models;
 /**
  * Created by PhpStorm.
  * User: Andrei
  * Date: 29.07.2017
  * Time: 16:31
  */
-const FILE_CONFIG = 'config.txt';
+//const FILE_CONFIG = 'config.txt';
 class DB
 {
 	protected $dbName;
@@ -17,7 +17,7 @@ class DB
 	
 	public function __construct()
 	{
-		$config = file(FILE_CONFIG);
+		$config = file('config.txt');
 		$res = [];
 		$arr = explode('=', $config[0]);
 		$res[0] = $arr[sizeof($arr) - 1];
@@ -34,7 +34,8 @@ class DB
 //		var_dump($res);
 		$dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->dbName;
 //		var_dump($dsn );
-		$this->dbh = new PDO($dsn, $this->user, $this->pass);
+		$this->dbh = new \PDO($dsn, $this->user, $this->pass);
+		return $this->dbh;
 	}
 	
 	public function execute($sql)
@@ -54,7 +55,6 @@ class DB
 		$sth = $this->dbh->prepare($sql);
 		$sth->execute($data);
 		$result = $sth->fetchAll();
-//		var_dump($result);
 		if(!$result) return false;
 		return $result;
 	}

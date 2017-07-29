@@ -16,22 +16,24 @@
  - index.php выводит все новости (самая новая - наверху)
  - article.php?id=N выводит одну новость, с id=N
  */
-require_once __DIR__ . '/classes/DB.php';
-require_once __DIR__ . '/classes/Article.php';
-require_once __DIR__ . '/classes/News.php';
-require_once __DIR__ . '/View.php';
+function __autoload($class){
+	
+	 $path =  __DIR__ . '/classes/' .
+		str_replace('\\', '/',$class) . '.php';
+	require $path;
+//	var_dump($path);
+}
 
 
-$db = new DB();
+$db = new \Models\DB();
 
-$v = new View();
+$v = new \Models\View();
 
-$n1 = new News();
+$n1 = new \Models\News();
 
 $articles = $n1->getAllArticles();
-var_dump($articles);
+//var_dump($articles);
 $v->assign('news', $articles);
 //var_dump($v2->data);
-
-$v->display(__DIR__ . '/news.php');
+$v->display(__DIR__ . '/templates/news.php');
 //$n1->getArticle('0');
