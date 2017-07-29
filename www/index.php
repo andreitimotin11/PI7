@@ -16,6 +16,22 @@
  - index.php выводит все новости (самая новая - наверху)
  - article.php?id=N выводит одну новость, с id=N
  */
-require_once __DIR__ . '/DB.php';
+require_once __DIR__ . '/classes/DB.php';
+require_once __DIR__ . '/classes/Article.php';
+require_once __DIR__ . '/classes/News.php';
+require_once __DIR__ . '/View.php';
+
+
 $db = new DB();
-$db->query('SELECT * FROM persons', '');
+
+$v = new View();
+
+$n1 = new News();
+
+$articles = $n1->getAllArticles();
+var_dump($articles);
+$v->assign('news', $articles);
+//var_dump($v2->data);
+
+$v->display(__DIR__ . '/news.php');
+//$n1->getArticle('0');

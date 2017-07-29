@@ -46,7 +46,7 @@ class DB
 		
 	}
 	
-	public function query($sql,$data)
+	public function query($sql, $data)
 	{
 		//Метод query(string $sql, array $data) выполняет запрос, подставляет в него
 		// данные $data, возвращает данные результата запроса либо false,
@@ -54,7 +54,7 @@ class DB
 		$sth = $this->dbh->prepare($sql);
 		$sth->execute($data);
 		$result = $sth->fetchAll();
-		var_dump($result);
+//		var_dump($result);
 		if(!$result) return false;
 		return $result;
 	}
